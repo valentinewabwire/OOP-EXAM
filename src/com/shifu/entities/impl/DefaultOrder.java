@@ -1,23 +1,24 @@
 package com.shifu.entities.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.shifu.entities.Order;
 import com.shifu.entities.Product;
 
 
-public abstract class DefaultOrder implements Order {
+public class DefaultOrder implements Order {
 
-	private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
-	
+	 private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
+
 	private String creditCardNumber;
-	private List<Product> products;
+	private Product[] products;
 	private int customerId;
 
 	@Override
 	public boolean isCreditCardNumberValid(String creditCardNumber) {
-		return creditCardNumber.toCharArray().length == AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER && 
+		return creditCardNumber.toCharArray().length == AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER &&
 				!creditCardNumber.contains(" ") && Long.parseLong(creditCardNumber) > 0;
 	}
 
@@ -30,8 +31,12 @@ public abstract class DefaultOrder implements Order {
 	}
 
 	@Override
+	public void setProducts(Product[] products) {
+		this.products = products;
+	}
+	@Override
 	public void setProducts(List<Product> products) {
-		this.products = new ArrayList<>(products);
+		this.products = products.toArray(new Product[0]);
 	}
 
 	@Override
@@ -44,16 +49,16 @@ public abstract class DefaultOrder implements Order {
 	public int getCustomerId() {
 		return this.customerId;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Order: customer id - " + this.customerId + "\t" +
-					"credit card number - " + this.creditCardNumber + "\t" + 
-					"products - " + this.products;
+				"credit card number - " + this.creditCardNumber + "\t" +
+				"products - " + Arrays.toString(this.products);
 	}
 
-	
-	
-	
+
+
+
 
 }

@@ -21,7 +21,7 @@ public class MainMenu implements Menu {
 			+ "1. Sign Up" + System.lineSeparator() + "2. Sign Out"
 			+ System.lineSeparator() + "3. Product Catalog" + System.lineSeparator()
 			+ "4. My Orders" + System.lineSeparator() + "5. Settings" + System.lineSeparator() + 
-			"6. Customer List";;
+			"6. Customer List";
 
 	private ApplicationContext context;
 	

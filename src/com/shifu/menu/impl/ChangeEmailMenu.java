@@ -3,6 +3,8 @@ package com.shifu.menu.impl;
 import com.shifu.configs.ApplicationContext;
 import com.shifu.menu.Menu;
 
+import java.util.Scanner;
+
 public class ChangeEmailMenu implements Menu {
 
 	private ApplicationContext context;
@@ -13,12 +15,17 @@ public class ChangeEmailMenu implements Menu {
 
 	@Override
 	public void start() {
-		// <write your code here>
+		printMenuHeader();
+		Scanner sc = new Scanner(System.in);
+		String userInput = sc.next();
+		context.getLoggedInUser().setEmail(userInput);
+		System.out.println("Your email has been successfully changed");
 	}
 
 	@Override
 	public void printMenuHeader() {
-		// <write your code here>
+		System.out.println("******* CHANGE EMAIL *******");
+		System.out.print("Enter New Email: ");
 	}
 
 }
