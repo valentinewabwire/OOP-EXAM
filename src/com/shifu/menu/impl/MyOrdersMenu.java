@@ -9,8 +9,8 @@ import com.shifu.services.impl.DefaultOrderManagementService;
 
 public class MyOrdersMenu implements Menu {
 
-	private ApplicationContext context;
-	private OrderManagementService orderManagementService;
+	private final ApplicationContext context;
+	private final OrderManagementService orderManagementService;
 
 	{
 		context = ApplicationContext.getInstance();
@@ -23,8 +23,7 @@ public class MyOrdersMenu implements Menu {
 		if(context.getLoggedInUser() == null){
 			System.out.println("Please, log in or create new account to see list of your orders");
 			new MainMenu().start();
-			return;
-		}else{
+        }else{
 			printUserOrdersToConsole();
 		}
 	}
