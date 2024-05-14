@@ -2,6 +2,7 @@ package com.shifu.menu.impl;
 
 
 import com.shifu.configs.ApplicationContext;
+import com.shifu.entities.User;
 import com.shifu.menu.Menu;
 import com.shifu.services.impl.DefaultUserManagementService;
 import com.shifu.services.UserManagementService;
@@ -18,12 +19,22 @@ public class CustomerListMenu implements Menu {
 	
 	@Override
 	public void start() {
-		// <write your code here>
+		printMenuHeader();
+
+		User [] users = userManagementService.getUsers().toArray(new User[0]);
+
+		if (users.length == 0) {
+			System.out.println("There are no users");
+		}else{
+			for (User user : users) {
+				System.out.println(user);
+			}
+		}
 	}
 
 	@Override
 	public void printMenuHeader() {
-		// <write your code here>	
+		System.out.println("***** USERS *****");
 	}
 
 }

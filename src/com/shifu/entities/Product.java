@@ -1,6 +1,8 @@
 package com.shifu.entities;
 
-public interface Product {
+import java.io.Serializable;
+
+public interface Product extends Serializable {
 
 	int getId();
 

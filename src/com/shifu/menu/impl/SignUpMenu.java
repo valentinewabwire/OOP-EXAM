@@ -8,16 +8,20 @@ import com.shifu.menu.Menu;
 import com.shifu.services.UserManagementService;
 import com.shifu.services.impl.DefaultUserManagementService;
 
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class SignUpMenu implements Menu {
 
 	private UserManagementService userManagementService;
 	private ApplicationContext context;
+	private ResourceBundle rb;
 
 	{
 		userManagementService = DefaultUserManagementService.getInstance();
 		context = ApplicationContext.getInstance();
+//		rb = ResourceBundle.getBundle()
+		//rb = ResourceBundle.getBundle("com.shifu.menu.impl");
 	}
 
 	/**
@@ -38,9 +42,11 @@ public class SignUpMenu implements Menu {
 		System.out.print("Please, enter your email: ");
 
 		sc = new Scanner(System.in);
-		String email = sc.nextLine();
+		String email = sc.nextLine();//do email authentication
 
-		User user = new DefaultUser(firstName,lastName,password,email);
+		userManagementService.getUsers();
+
+		User user = new DefaultUser (firstName,lastName,password,email);
 
 		String errorMessage = userManagementService.registerUser(user);
 		if (errorMessage == null || errorMessage.isEmpty()){

@@ -6,16 +6,20 @@ import com.shifu.menu.Menu;
 import com.shifu.services.UserManagementService;
 import com.shifu.services.impl.DefaultUserManagementService;
 
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class SignInMenu implements Menu {
 
 	private ApplicationContext context;
 	private UserManagementService userManagementService;
+	private ResourceBundle rb;
 
 	{
 		context = ApplicationContext.getInstance();
 		userManagementService = DefaultUserManagementService.getInstance();
+//		rb = ResourceBundle.getBundle(RESOURCE_BUNDLE_BASE_NAME);
+		rb = ResourceBundle.getBundle("com.shifu.menu.impl");
 	}
 
 	@Override
@@ -30,16 +34,16 @@ public class SignInMenu implements Menu {
 
 		User user = userManagementService.getUserByEmail(userEmail);
 		if (user != null && user.getPassword().equals(userPassword)){
-			System.out.printf("Glad to see you back %s %s",user.getFirstName(),user.getLastName() + System.lineSeparator());
+			System.out.printf(rb.getString("Glad to see you back %s %s"),user.getFirstName(),user.getLastName() + System.lineSeparator());
 			context.setLoggedInUser(user);
 		}else{
-			System.out.println("Unfortunate such log in user or password doesn't exist");
+			System.out.println(rb.getString("Unfortunate such log in user or password doesn't exist"));
 		}
 	}
 
 	@Override
 	public void printMenuHeader() {
-		System.out.println("***** Sign In *****");
+		System.out.println(rb.getString("***** Sign In *****"));
 	}
 
 }

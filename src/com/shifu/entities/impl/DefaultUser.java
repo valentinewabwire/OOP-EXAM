@@ -2,7 +2,12 @@ package com.shifu.entities.impl;
 
 import com.shifu.entities.User;
 
-public class DefaultUser implements User {
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class DefaultUser implements User, Serializable {
 	
 	private static int userCounter = 0;
 	
@@ -90,5 +95,14 @@ public class DefaultUser implements User {
 	
 	public static void setCounter(int updatedCount) {
 		userCounter = updatedCount;
+	}
+
+	public byte[] toByteArray() throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream(baos);
+		oos.writeObject(this);
+		oos.flush();
+		oos.close();
+		return baos.toByteArray();
 	}
 }
